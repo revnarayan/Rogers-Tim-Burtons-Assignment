@@ -1,6 +1,8 @@
 package com.revnarayan.rogerstimburtonsassignment.retrofit
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.revnarayan.rogerstimburtonsassignment.model.Product
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
@@ -11,7 +13,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Retrofit {
+class Repository {
+    private val _productList = MutableLiveData<List<Product>>()
+    val productList: LiveData<List<Product>>
+        get() = _productList
+
     fun getProducts() {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(MockResponseInterceptor())
@@ -32,6 +38,10 @@ class Retrofit {
             ) {
                 Log.i("Network call success!!", response.body().toString())
                 //this is where youd have the list of products
+                if (response.isSuccessful) {
+                    val productMenuList = response.body()
+                    _productList.postValue(productMenuList?.products)
+                }
             }
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {
