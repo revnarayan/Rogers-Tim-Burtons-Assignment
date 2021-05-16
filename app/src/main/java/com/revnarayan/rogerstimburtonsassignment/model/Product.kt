@@ -13,7 +13,3 @@ data class Product(
     @SerializedName("type") val type: String?
 ): Parcelable
 
-fun Product.convertToUiModel(): ProductsUiModel = ProductsUiModel(
-    name,
-    cost
-)

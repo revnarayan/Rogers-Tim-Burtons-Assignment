@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.revnarayan.rogerstimburtonsassignment.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -15,8 +16,9 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater)
+        return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +27,4 @@ class HomeFragment : Fragment() {
          it.findNavController().navigate(R.id.action_homeFragment_to_productsFragment)
         }
     }
-
-
 }

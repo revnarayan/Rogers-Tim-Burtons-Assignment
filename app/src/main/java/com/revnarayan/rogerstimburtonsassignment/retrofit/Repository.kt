@@ -54,5 +54,9 @@ class Repository {
         })
 
     }
+    fun Product.convertToUiModel(): ProductsUiModel = ProductsUiModel(
+        name,
+        cost
+    )
 
 }

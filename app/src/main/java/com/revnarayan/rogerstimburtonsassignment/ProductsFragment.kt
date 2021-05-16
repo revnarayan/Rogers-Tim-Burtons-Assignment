@@ -1,15 +1,15 @@
 package com.revnarayan.rogerstimburtonsassignment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.revnarayan.rogerstimburtonsassignment.model.Product
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
+import com.revnarayan.rogerstimburtonsassignment.databinding.FragmentProductsBinding
+import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
 import com.revnarayan.rogerstimburtonsassignment.recyclerview.ProductsAdapter
 import com.revnarayan.rogerstimburtonsassignment.viewmodel.ProductsViewModel
@@ -23,8 +23,8 @@ class ProductsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_products, container, false)
+        val binding = FragmentProductsBinding.inflate(inflater)
+        return binding.root
 
     }
 
@@ -34,13 +34,11 @@ class ProductsFragment : Fragment() {
             setProductListAdapter(it.productsUiModel)
         })
     }
-
-    private fun setProductListAdapter(productsList: List<ProductsUiModel>?) {
+    private fun setProductListAdapter(productList: List<ProductsUiModel>?){
         rv_recycler_view.apply {
             setHasFixedSize(true)
-            adapter = ProductsAdapter(productsList)
+            adapter = ProductsAdapter(productList)
             layoutManager = LinearLayoutManager(activity?.applicationContext)
         }
     }
-
 }
