@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revnarayan.rogerstimburtonsassignment.R
 import com.revnarayan.rogerstimburtonsassignment.model.Product
+import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
 import kotlinx.android.synthetic.main.products_list_row_item.view.*
 
-class ProductsAdapter(private val productList: List<Product>?) :
+class ProductsAdapter(private val productList: List<ProductsUiModel>?) :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
 
 

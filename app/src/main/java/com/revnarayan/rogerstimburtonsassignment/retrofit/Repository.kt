@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
-import com.revnarayan.rogerstimburtonsassignment.model.Product
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
+import com.revnarayan.rogerstimburtonsassignment.model.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,9 +13,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Repository {
-    private val _productList = MutableLiveData<List<Product>>()
-    val productList: LiveData<List<Product>>
-        get() = _productList
+    private val _productsPageUiModel = MutableLiveData<ProductsPageUiModel>()
+    val productsPageUiModel: LiveData<ProductsPageUiModel>
+        get() = _productsPageUiModel
 
     fun getProducts() {
         val okHttpClient = OkHttpClient.Builder()
@@ -37,11 +36,16 @@ class Repository {
                 response: Response<ProductsResponse>
             ) {
                 Log.i("Network call success!!", response.body().toString())
-                //this is where youd have the list of products
+                //this is where you would have the list of products
                 if (response.isSuccessful) {
-                    val productMenuList = response.body()
-                    _productList.postValue(productMenuList?.products)
+                    val productList: List<Product>? = response.body()?.products
+                    val producsUiModels: List<ProductsUiModel>? = productList?.map {
+                        it.convertToUiModel()
+                    }
+                    val productsPageUiModel = ProductsPageUiModel(producsUiModels)
+                    _productsPageUiModel.postValue(productsPageUiModel)
                 }
+
             }
 
             override fun onFailure(call: Call<ProductsResponse>, t: Throwable) {

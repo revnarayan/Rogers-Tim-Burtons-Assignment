@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revnarayan.rogerstimburtonsassignment.model.Product
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
+import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
 import com.revnarayan.rogerstimburtonsassignment.recyclerview.ProductsAdapter
 import com.revnarayan.rogerstimburtonsassignment.viewmodel.ProductsViewModel
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_products.*
 class ProductsFragment : Fragment() {
 
     private val myViewModel: ProductsViewModel by activityViewModels()
-    private val productList : List<Product> = listOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,12 +30,12 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myViewModel.productsList.observe(viewLifecycleOwner, Observer {
-            setProductListAdapter(it)
+        myViewModel.productsPageUiModel.observe(viewLifecycleOwner, Observer {
+            setProductListAdapter(it.productsUiModel)
         })
     }
 
-    private fun setProductListAdapter(productsList: List<Product>) {
+    private fun setProductListAdapter(productsList: List<ProductsUiModel>?) {
         rv_recycler_view.apply {
             setHasFixedSize(true)
             adapter = ProductsAdapter(productsList)

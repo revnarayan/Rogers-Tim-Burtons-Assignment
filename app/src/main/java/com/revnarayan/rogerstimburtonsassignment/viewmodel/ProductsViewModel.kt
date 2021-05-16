@@ -4,21 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.revnarayan.rogerstimburtonsassignment.model.Product
+import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
 import com.revnarayan.rogerstimburtonsassignment.retrofit.Repository
 
 class ProductsViewModel : ViewModel() {
     private val repository = Repository()
-    private val _productList = MutableLiveData<List<Product>>()
-    val productsList: LiveData<List<Product>>
-        get() = _productList
+    private val _productsPageUiModel = MutableLiveData<ProductsPageUiModel>()
+    val productsPageUiModel: LiveData<ProductsPageUiModel>
+        get() = _productsPageUiModel
 
 
     init {
         repository.apply {
             getProducts()
-            productList.observeForever {
-                _productList.postValue(it)
+            productsPageUiModel.observeForever {
+                _productsPageUiModel.postValue(it)
             }
         }
     }
