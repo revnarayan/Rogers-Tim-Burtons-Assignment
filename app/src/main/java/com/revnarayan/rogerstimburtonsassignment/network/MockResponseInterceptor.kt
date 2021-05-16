@@ -1,13 +1,15 @@
-package com.revnarayan.rogerstimburtonsassignment.retrofit
+package com.revnarayan.rogerstimburtonsassignment.network
 
 import com.google.gson.GsonBuilder
+import com.revnarayan.rogerstimburtonsassignment.di.PRODUCTS_END_POINT
 import com.revnarayan.rogerstimburtonsassignment.model.Product
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
 import okhttp3.*
+import javax.inject.Inject
 
 const val SUCCESS_CODE = 200
 
-class MockResponseInterceptor : Interceptor {
+class MockResponseInterceptor @Inject constructor() : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val uri = chain.request().url().uri().toString()
@@ -15,7 +17,13 @@ class MockResponseInterceptor : Interceptor {
             Product(id = 1, name = "Coffee", size = "small", cost = 0.99, type = "drink"),
             Product(id = 2, name = "Coffee", size = "medium", cost = 1.22, type = "drink"),
             Product(id = 3, name = "Coffee", size = "large", cost = 1.54, type = "drink"),
-            Product(id = 4, name = "Lemon Poppy Seed Cake", size = null, cost = 0.99, type = "food"),
+            Product(
+                id = 4,
+                name = "Lemon Poppy Seed Cake",
+                size = null,
+                cost = 0.99,
+                type = "food"
+            ),
             Product(id = 5, name = "Banana", size = null, cost = 0.99, type = "food")
         )
         val gson = GsonBuilder().create()

@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revnarayan.rogerstimburtonsassignment.databinding.ProductsListRowItemBinding
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
+import dagger.hilt.android.scopes.FragmentScoped
+import javax.inject.Inject
 
-class ProductsAdapter(private val productItems: List<ProductsUiModel>?) :
+@FragmentScoped
+class ProductsAdapter @Inject constructor() :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
 
-
+    var productItems: List<ProductsUiModel>? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
