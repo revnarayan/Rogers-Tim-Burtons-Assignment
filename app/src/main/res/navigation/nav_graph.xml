@@ -10,13 +10,20 @@
         android:name="com.revnarayan.rogerstimburtonsassignment.HomeFragment"
         android:label="Tim Burtons"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_productsFragment"
-            app:destination="@id/productsFragment" />
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.revnarayan.rogerstimburtonsassignment.ProductsFragment"
         android:label="Products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_searchItemFragment"
+            app:destination="@id/searchItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchItemFragment"
+        android:name="com.revnarayan.rogerstimburtonsassignment.SearchItemFragment"
+        android:label="fragment_search_item"
+        tools:layout="@layout/fragment_search_item" >
+    </fragment>
 </navigation>
