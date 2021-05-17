@@ -3,9 +3,7 @@ package com.revnarayan.rogerstimburtonsassignment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -32,6 +30,7 @@ class ProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentProductsBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -65,5 +64,9 @@ class ProductsFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        activity?.invalidateOptionsMenu()
+    }
 
 }
