@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -29,9 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:textColor="@color/grey"
+            android:textColor="@color/dark_grey"
             android:text="@{productItem.cost.toString()}"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:drawableStartCompat="@drawable/ic_baseline_attach_money_24" />
 
 
     </LinearLayout>

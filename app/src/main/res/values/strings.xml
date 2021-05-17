@@ -3,5 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="product_menu">Product Menu</string>
+    <string name="dollar_sign"> $ %d</string>
     <string name="search_products"> Search for an item</string>
 </resources>
