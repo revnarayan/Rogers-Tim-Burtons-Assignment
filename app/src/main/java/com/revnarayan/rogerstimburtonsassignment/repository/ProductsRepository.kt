@@ -3,14 +3,14 @@ package com.revnarayan.rogerstimburtonsassignment.repository
 import com.revnarayan.rogerstimburtonsassignment.model.Product
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
 import com.revnarayan.rogerstimburtonsassignment.network.ApiInterface
 import com.revnarayan.rogerstimburtonsassignment.network.Try
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProductsRepository @Inject constructor(private val apiInterface: ApiInterface) {
+open class ProductsRepository @Inject constructor(private val apiInterface: ApiInterface) {
 
     open suspend fun getProductsPageUiModel(): ProductsPageUiModel? {
         val tryProductResponse: Try<ProductsResponse> = wrapResult {
@@ -19,15 +19,15 @@ class ProductsRepository @Inject constructor(private val apiInterface: ApiInterf
         return when (tryProductResponse) {
             is Try.Success -> {
                 val productList = tryProductResponse.value
-                val productsUiModels: List<ProductsUiModel>? = productList.products?.map {
+                val productUiModels: List<ProductUiModels>? = productList.products?.map {
                     it.convertToUiModel()
                 }
-                ProductsPageUiModel(productsUiModels)
+                ProductsPageUiModel(productUiModels)
             }
             is Try.Failure<*> -> null
         }
     }
-    private fun Product.convertToUiModel(): ProductsUiModel = ProductsUiModel(
+    private fun Product.convertToUiModel(): ProductUiModels = ProductUiModels(
         name,
         cost
     )

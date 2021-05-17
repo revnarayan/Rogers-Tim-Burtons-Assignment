@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="productsItem"
-            type="com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel" />
+            name="productItem"
+            type="com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +19,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
-            android:text="@{productsItem.name}"
-            android:textSize="18sp"
+            android:text="@{productItem.name}"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -29,10 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:text="@{productsItem.cost.toString()}"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textColor="@color/grey"
+            android:text="@{productItem.cost.toString()}"
+            android:textSize="18sp" />
 
 
     </LinearLayout>

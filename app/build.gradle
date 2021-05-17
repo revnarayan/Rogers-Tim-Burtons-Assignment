@@ -89,4 +89,11 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.3.0"
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.8.0'
 
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test.ext:junit-ktx:1.1.2"
+
+    testImplementation "androidx.test:core-ktx:1.3.0"
+
+    testImplementation "org.robolectric:robolectric:4.4"
+
 }

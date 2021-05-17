@@ -1,6 +1,6 @@
 package com.revnarayan.rogerstimburtonsassignment.model
 
-data class ProductsUiModel(
+data class ProductUiModels(
     val name: String?,
     val cost: Double?,
 )

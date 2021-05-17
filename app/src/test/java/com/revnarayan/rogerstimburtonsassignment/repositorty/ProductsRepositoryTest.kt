@@ -3,7 +3,7 @@ package com.revnarayan.rogerstimburtonsassignment.repositorty
 import com.revnarayan.rogerstimburtonsassignment.model.Product
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsUiModel
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
 import com.revnarayan.rogerstimburtonsassignment.network.ApiInterface
 import com.revnarayan.rogerstimburtonsassignment.network.Try
 import com.revnarayan.rogerstimburtonsassignment.repository.ProductsRepository
@@ -39,13 +39,13 @@ class ProductsRepositoryTest {
             Mockito.`when`(productsApiInterface.getProducts())
                 .thenReturn(productListResponse.body())
 
-            val productsUiModel: List<ProductsUiModel> = arrayListOf(
-                ProductsUiModel(
+            val productUiModels: List<ProductUiModels> = arrayListOf(
+                ProductUiModels(
                     "NameTest",
                     2.99
                 )
             )
-            val productsPageUiModel = ProductsPageUiModel(productsUiModel)
+            val productsPageUiModel = ProductsPageUiModel(productUiModels)
 
             val result = repository.getProductsPageUiModel()
 
