@@ -36,12 +36,14 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         myViewModel.productsPageUiModel.observe(viewLifecycleOwner, Observer {
             productsList = it.productsUiModel
+            productsAdapter.apply {
+                productItems = productsList
+                notifyDataSetChanged()
+            }
         })
         rv_recycler_view.apply {
             setHasFixedSize(true)
-            adapter = productsAdapter.apply {
-                productItems = productsList
-            }
+            adapter = productsAdapter
             layoutManager = LinearLayoutManager(activity?.applicationContext)
         }
 

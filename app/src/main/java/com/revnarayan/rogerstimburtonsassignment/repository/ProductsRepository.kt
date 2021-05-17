@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Singleton
 class ProductsRepository @Inject constructor(private val apiInterface: ApiInterface) {
 
-    suspend fun getProducts(): ProductsPageUiModel? {
+    open suspend fun getProductsPageUiModel(): ProductsPageUiModel? {
         val tryProductResponse: Try<ProductsResponse> = wrapResult {
             apiInterface.getProducts()
         }
@@ -31,7 +31,7 @@ class ProductsRepository @Inject constructor(private val apiInterface: ApiInterf
         name,
         cost
     )
-    private suspend fun <T> wrapResult(apiCall: suspend () -> T): Try<T> {
+     suspend fun <T> wrapResult(apiCall: suspend () -> T): Try<T> {
         return try {
             Try.Success(apiCall.invoke())
         } catch (throwable: Throwable) {

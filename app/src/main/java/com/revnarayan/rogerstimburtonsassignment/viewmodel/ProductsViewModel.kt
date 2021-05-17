@@ -27,19 +27,9 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
     private fun getProductContent() = liveData(Dispatchers.IO) {
         emit(
             withContext(Dispatchers.IO) {
-                productsRepository.getProducts()
+                productsRepository.getProductsPageUiModel()
             })
     }.observeForever { result ->
-        val currentProductPageUiModel = _productsPageUiModel.value
-        val currentProductsUiModel = currentProductPageUiModel?.productsUiModel
-        val productsUiModel = result?.productsUiModel
-
-        val mergedUiModels = mutableListOf<ProductsUiModel>().apply {
-            if (currentProductsUiModel != null) addAll(currentProductsUiModel)
-            if (productsUiModel != null) addAll(productsUiModel)
-        }
-        val mergedUiModel = ProductsPageUiModel(mergedUiModels)
-        _productsPageUiModel.postValue(mergedUiModel)
-
+        _productsPageUiModel.postValue(result)
     }
 }
