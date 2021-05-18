@@ -34,10 +34,10 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myViewModel.unfilteredProductUiModels.observe(viewLifecycleOwner, Observer {
+        myViewModel.unfilteredProductUiModels.observe(viewLifecycleOwner){
             productList = it
             updateProductList()
-        })
+        }
         rv_recycler_view.apply {
             setHasFixedSize(true)
             adapter = productsAdapter
