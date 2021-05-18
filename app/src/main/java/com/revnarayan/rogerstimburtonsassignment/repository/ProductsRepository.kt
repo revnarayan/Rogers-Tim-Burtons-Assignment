@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 open class ProductsRepository @Inject constructor(private val apiInterface: ApiInterface) {
 
-    open suspend fun getProductsPageUiModel(): List<ProductUiModel>? {
+    open suspend fun getProducts(): List<ProductUiModel>? {
         val tryProductResponse: Try<ProductsResponse> = wrapResult {
             apiInterface.getProducts()
         }

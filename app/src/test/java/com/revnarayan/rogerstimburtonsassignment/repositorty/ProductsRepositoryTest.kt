@@ -1,9 +1,8 @@
 package com.revnarayan.rogerstimburtonsassignment.repositorty
 
 import com.revnarayan.rogerstimburtonsassignment.model.Product
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
-import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
 import com.revnarayan.rogerstimburtonsassignment.network.ApiInterface
 import com.revnarayan.rogerstimburtonsassignment.network.Try
 import com.revnarayan.rogerstimburtonsassignment.repository.ProductsRepository
@@ -23,10 +22,17 @@ class ProductsRepositoryTest {
     private val productList: List<Product> = listOf(
         Product(
             1,
-            "NameTest",
+            "Coffee",
             "Small",
             2.99,
-            "TypeTest"
+            "Drink"
+        ),
+        Product(
+            2,
+            "Coffee",
+            "Medium",
+            3.99,
+            "Drink"
         )
     )
 
@@ -39,30 +45,30 @@ class ProductsRepositoryTest {
             Mockito.`when`(productsApiInterface.getProducts())
                 .thenReturn(productListResponse.body())
 
-            val productUiModels: List<ProductUiModels> = arrayListOf(
-                ProductUiModels(
-                    "NameTest",
+            val productUiModels: List<ProductUiModel> = arrayListOf(
+                ProductUiModel(
+                    "Coffee",
                     2.99
+                ),
+                ProductUiModel(
+                    "Coffee",
+                    3.99
                 )
             )
-            val productsPageUiModel = ProductsPageUiModel(productUiModels)
 
-            val result = repository.getProductsPageUiModel()
+            val result = repository.getProducts()
 
-            assertEquals(result, productsPageUiModel)
-
-
+            assertEquals(result, productUiModels)
         }
     }
 
     // Verify API calls success within coroutine scope
     @Test
     fun testWrapResult_Success() = runBlocking {
-
         Mockito.`when`(productsApiInterface.getProducts()).thenReturn(productListResponse.body())
 
         val result = repository.wrapResult {
-            repository.getProductsPageUiModel()
+            repository.getProducts()
         }
         Assert.assertThat(result, CoreMatchers.instanceOf(Try.Success::class.java))
     }
@@ -73,7 +79,7 @@ class ProductsRepositoryTest {
 
         Mockito.`when`(productsApiInterface.getProducts()).thenThrow(HttpException::class.java)
 
-        val result = repository.getProductsPageUiModel()
+        val result = repository.getProducts()
 
         Assert.assertNull(result)
     }

@@ -1,10 +1,7 @@
 package com.revnarayan.rogerstimburtonsassignment.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.repository.ProductsRepository
 import dagger.hilt.android.scopes.ActivityScoped
@@ -16,27 +13,26 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
     private val _filteredProductUiModels = MutableLiveData<List<ProductUiModel>>()
     val filteredProductUiModels = _filteredProductUiModels
 
-
     private val _unfilteredProductUiModels: MutableLiveData<List<ProductUiModel>> =
         MutableLiveData()
     val unfilteredProductUiModels: LiveData<List<ProductUiModel>>
         get() = _unfilteredProductUiModels
 
     init {
-        getProductContent()
+        fetchProducts()
     }
 
-    fun getProductContent() = liveData(Dispatchers.IO) {
+    private fun fetchProducts() = liveData(Dispatchers.IO) {
         emit(
             withContext(Dispatchers.IO) {
-                productsRepository.getProductsPageUiModel()
+                productsRepository.getProducts()
             })
     }.observeForever { result ->
         _unfilteredProductUiModels.postValue(result)
     }
 
     fun executeSearch(searchTerm: CharSequence?) {
-        GlobalScope.launch {
+        viewModelScope.launch {
             delay(50)
             val totalProductsList = _unfilteredProductUiModels.value
             val filteredList = searchTerm?.takeIf { it.isNotEmpty() }?.let {
