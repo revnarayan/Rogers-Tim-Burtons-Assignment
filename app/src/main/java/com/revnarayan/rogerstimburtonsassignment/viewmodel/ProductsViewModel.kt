@@ -9,8 +9,7 @@ import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
 import com.revnarayan.rogerstimburtonsassignment.repository.ProductsRepository
 import dagger.hilt.android.scopes.ActivityScoped
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 @ActivityScoped
 class ProductsViewModel @ViewModelInject constructor(private val productsRepository: ProductsRepository) :
@@ -36,12 +35,15 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
     }
 
     fun executeSearch(searchTerm: CharSequence?) {
-        val totalProductsList = _productsPageUiModel.value?.productUiModels
-        val filteredList = searchTerm?.takeIf { it.isNotEmpty() }?.let {
-            totalProductsList?.filter {
-                it.name?.startsWith(searchTerm, ignoreCase = true) ?: false
-            }
-        } ?: unfilteredProductList
-        _productsPageUiModel.postValue(ProductsPageUiModel(filteredList))
+        GlobalScope.launch {
+            delay(50)
+            val totalProductsList = _productsPageUiModel.value?.productUiModels
+            val filteredList = searchTerm?.takeIf { it.isNotEmpty() }?.let {
+                totalProductsList?.filter {
+                    it.name?.startsWith(searchTerm, ignoreCase = true) ?: false
+                }
+            } ?: unfilteredProductList
+            _productsPageUiModel.postValue(ProductsPageUiModel(filteredList))
+        }
     }
 }
