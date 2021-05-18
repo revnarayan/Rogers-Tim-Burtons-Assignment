@@ -31,7 +31,7 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
         _unfilteredProductUiModels.postValue(result)
     }
 
-    fun executeSearch(searchTerm: CharSequence?) {
+    fun filterProducts(searchTerm: CharSequence?) {
         viewModelScope.launch {
             delay(50)
             val totalProductsList = _unfilteredProductUiModels.value

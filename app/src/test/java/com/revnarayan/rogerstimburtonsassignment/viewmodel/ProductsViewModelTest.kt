@@ -63,7 +63,7 @@ class ProductsViewModelTest {
             val productsViewModel = ProductsViewModel(repository)
             productsViewModel.filteredProductUiModels.observeForever(productsListObserver)
 
-            productsViewModel.executeSearch("c")
+            productsViewModel.filterProducts("c")
             delay(500)
 
             verify(productsListObserver).onChanged(anyList())

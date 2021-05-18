@@ -17,8 +17,8 @@ open class ProductsRepository @Inject constructor(private val apiInterface: ApiI
         }
         return when (tryProductResponse) {
             is Try.Success -> {
-                val productList = tryProductResponse.value
-                val productUiModels: List<ProductUiModel>? = productList.products?.map {
+                val productsResponse = tryProductResponse.value
+                val productUiModels: List<ProductUiModel>? = productsResponse.products?.map {
                     it.convertToUiModel()
                 }
                 productUiModels
