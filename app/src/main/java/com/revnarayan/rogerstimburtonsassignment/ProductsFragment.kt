@@ -12,9 +12,7 @@ import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.recyclerview.ProductsAdapter
 import com.revnarayan.rogerstimburtonsassignment.viewmodel.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_products.*
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,9 +44,6 @@ class ProductsFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity?.applicationContext)
         }
     }
-
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) = inflater.inflate(R.menu.menu_main, menu)
 
     private fun updateProductList() {
@@ -57,8 +52,6 @@ class ProductsFragment : Fragment() {
             notifyDataSetChanged()
         }
     }
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.search_icon -> {

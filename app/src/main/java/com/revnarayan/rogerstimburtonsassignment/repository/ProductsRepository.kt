@@ -26,11 +26,13 @@ open class ProductsRepository @Inject constructor(private val apiInterface: ApiI
             is Try.Failure<*> -> null
         }
     }
+
     private fun Product.convertToUiModel(): ProductUiModel = ProductUiModel(
         name,
         cost
     )
-     suspend fun <T> wrapResult(apiCall: suspend () -> T): Try<T> {
+
+    suspend fun <T> wrapResult(apiCall: suspend () -> T): Try<T> {
         return try {
             Try.Success(apiCall.invoke())
         } catch (throwable: Throwable) {

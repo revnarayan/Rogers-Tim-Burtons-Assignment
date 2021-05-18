@@ -13,18 +13,12 @@ import kotlinx.coroutines.*
 @ActivityScoped
 class ProductsViewModel @ViewModelInject constructor(private val productsRepository: ProductsRepository) :
     ViewModel() {
-
-//    private val _filteredProductUiModels: MutableLiveData<List<ProductUiModel>>
-//            = MutableLiveData()
-//    val filteredProductUiModels: LiveData<List<ProductUiModel>>
-//        get() = _filteredProductUiModels
-
     private val _filteredProductUiModels = MutableLiveData<List<ProductUiModel>>()
     val filteredProductUiModels = _filteredProductUiModels
 
 
-    private val _unfilteredProductUiModels: MutableLiveData<List<ProductUiModel>>
-            = MutableLiveData()
+    private val _unfilteredProductUiModels: MutableLiveData<List<ProductUiModel>> =
+        MutableLiveData()
     val unfilteredProductUiModels: LiveData<List<ProductUiModel>>
         get() = _unfilteredProductUiModels
 
@@ -32,7 +26,7 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
         getProductContent()
     }
 
-     fun getProductContent() = liveData(Dispatchers.IO) {
+    fun getProductContent() = liveData(Dispatchers.IO) {
         emit(
             withContext(Dispatchers.IO) {
                 productsRepository.getProductsPageUiModel()

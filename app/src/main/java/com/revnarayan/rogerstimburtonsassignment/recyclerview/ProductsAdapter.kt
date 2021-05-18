@@ -21,11 +21,13 @@ class ProductsAdapter @Inject constructor() :
         val binding = ProductsListRowItemBinding.inflate(LayoutInflater.from(parent.context))
         return ProductsViewHolder(binding)
     }
+
     override fun onBindViewHolder(holder: ProductsAdapter.ProductsViewHolder, position: Int) {
         productItems?.get(position)?.let {
             holder.bind(it)
         }
     }
+
     override fun getItemCount(): Int = productItems?.size ?: 0
 
     inner class ProductsViewHolder(private val binding: ProductsListRowItemBinding) :
