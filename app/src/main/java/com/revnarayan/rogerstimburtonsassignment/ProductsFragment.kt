@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.revnarayan.rogerstimburtonsassignment.databinding.FragmentProductsBinding
-import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.recyclerview.ProductsAdapter
 import com.revnarayan.rogerstimburtonsassignment.viewmodel.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class ProductsFragment : Fragment() {
 
     private val myViewModel: ProductsViewModel by activityViewModels()
-    private var productList: List<ProductUiModels>? = listOf()
+    private var productList: List<ProductUiModel>? = listOf()
 
     @Inject
     lateinit var productsAdapter: ProductsAdapter
@@ -36,8 +36,8 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        myViewModel.productsPageUiModel.observe(viewLifecycleOwner, Observer {
-            productList = it.productUiModels
+        myViewModel.unfilteredProductUiModels.observe(viewLifecycleOwner, Observer {
+            productList = it
             updateProductList()
         })
         rv_recycler_view.apply {
@@ -45,7 +45,6 @@ class ProductsFragment : Fragment() {
             adapter = productsAdapter
             layoutManager = LinearLayoutManager(activity?.applicationContext)
         }
-
     }
 
 
@@ -57,7 +56,6 @@ class ProductsFragment : Fragment() {
             productItems = productList
             notifyDataSetChanged()
         }
-
     }
 
 

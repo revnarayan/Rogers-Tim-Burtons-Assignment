@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
-import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.repository.ProductsRepository
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.*
@@ -15,10 +14,19 @@ import kotlinx.coroutines.*
 class ProductsViewModel @ViewModelInject constructor(private val productsRepository: ProductsRepository) :
     ViewModel() {
 
-    private val _productsPageUiModel = MutableLiveData<ProductsPageUiModel>()
-    val productsPageUiModel: LiveData<ProductsPageUiModel>
-        get() = _productsPageUiModel
-    var unfilteredProductList: List<ProductUiModels>? = null
+//    private val _filteredProductUiModels: MutableLiveData<List<ProductUiModel>>
+//            = MutableLiveData()
+//    val filteredProductUiModels: LiveData<List<ProductUiModel>>
+//        get() = _filteredProductUiModels
+
+    private val _filteredProductUiModels = MutableLiveData<List<ProductUiModel>>()
+    val filteredProductUiModels = _filteredProductUiModels
+
+
+    private val _unfilteredProductUiModels: MutableLiveData<List<ProductUiModel>>
+            = MutableLiveData()
+    val unfilteredProductUiModels: LiveData<List<ProductUiModel>>
+        get() = _unfilteredProductUiModels
 
     init {
         getProductContent()
@@ -30,20 +38,19 @@ class ProductsViewModel @ViewModelInject constructor(private val productsReposit
                 productsRepository.getProductsPageUiModel()
             })
     }.observeForever { result ->
-        unfilteredProductList = result?.productUiModels
-        _productsPageUiModel.postValue(result)
+        _unfilteredProductUiModels.postValue(result)
     }
 
     fun executeSearch(searchTerm: CharSequence?) {
         GlobalScope.launch {
             delay(50)
-            val totalProductsList = _productsPageUiModel.value?.productUiModels
+            val totalProductsList = _unfilteredProductUiModels.value
             val filteredList = searchTerm?.takeIf { it.isNotEmpty() }?.let {
                 totalProductsList?.filter {
                     it.name?.startsWith(searchTerm, ignoreCase = true) ?: false
                 }
-            } ?: unfilteredProductList
-            _productsPageUiModel.postValue(ProductsPageUiModel(filteredList))
+            } ?: listOf()
+            _filteredProductUiModels.postValue(filteredList)
         }
     }
 }

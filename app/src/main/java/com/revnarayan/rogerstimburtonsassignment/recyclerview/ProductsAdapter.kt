@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.revnarayan.rogerstimburtonsassignment.databinding.ProductsListRowItemBinding
-import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import dagger.hilt.android.scopes.FragmentScoped
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ProductsAdapter @Inject constructor() :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
 
-    var productItems: List<ProductUiModels>? = null
+    var productItems: List<ProductUiModel>? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,7 +30,7 @@ class ProductsAdapter @Inject constructor() :
 
     inner class ProductsViewHolder(private val binding: ProductsListRowItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(productItem: ProductUiModels) {
+        fun bind(productItem: ProductUiModel) {
             binding.productItem = productItem
             binding.executePendingBindings()
         }

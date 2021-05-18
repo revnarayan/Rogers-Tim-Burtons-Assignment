@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="productItem"
-            type="com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels" />
+            type="com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
-            android:textColor="@color/black"
             android:text="@{productItem.name}"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -30,10 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="10dp"
+            android:text="@{productItem.costString}"
             android:textColor="@color/dark_grey"
-            android:text="@{productItem.cost.toString()}"
-            android:textSize="18sp"
-            app:drawableStartCompat="@drawable/ic_baseline_attach_money_24" />
+            android:textSize="18sp" />
 
 
     </LinearLayout>

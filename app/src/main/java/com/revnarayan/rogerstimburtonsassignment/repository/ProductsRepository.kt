@@ -1,9 +1,8 @@
 package com.revnarayan.rogerstimburtonsassignment.repository
 
 import com.revnarayan.rogerstimburtonsassignment.model.Product
-import com.revnarayan.rogerstimburtonsassignment.model.ProductsPageUiModel
 import com.revnarayan.rogerstimburtonsassignment.model.ProductsResponse
-import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModels
+import com.revnarayan.rogerstimburtonsassignment.model.ProductUiModel
 import com.revnarayan.rogerstimburtonsassignment.network.ApiInterface
 import com.revnarayan.rogerstimburtonsassignment.network.Try
 import javax.inject.Inject
@@ -12,22 +11,22 @@ import javax.inject.Singleton
 @Singleton
 open class ProductsRepository @Inject constructor(private val apiInterface: ApiInterface) {
 
-    open suspend fun getProductsPageUiModel(): ProductsPageUiModel? {
+    open suspend fun getProductsPageUiModel(): List<ProductUiModel>? {
         val tryProductResponse: Try<ProductsResponse> = wrapResult {
             apiInterface.getProducts()
         }
         return when (tryProductResponse) {
             is Try.Success -> {
                 val productList = tryProductResponse.value
-                val productUiModels: List<ProductUiModels>? = productList.products?.map {
+                val productUiModels: List<ProductUiModel>? = productList.products?.map {
                     it.convertToUiModel()
                 }
-                ProductsPageUiModel(productUiModels)
+                productUiModels
             }
             is Try.Failure<*> -> null
         }
     }
-    private fun Product.convertToUiModel(): ProductUiModels = ProductUiModels(
+    private fun Product.convertToUiModel(): ProductUiModel = ProductUiModel(
         name,
         cost
     )
