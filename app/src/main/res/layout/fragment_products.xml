@@ -9,18 +9,6 @@
         android:layout_height="match_parent"
         tools:context=".ProductsFragment">
 
-        <EditText
-            android:id="@+id/search_text"
-            android:textColor="@color/black"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/search_products"
-            android:inputType="text"
-            app:layout_constraintTop_toTopOf="parent"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:autofillHints="Enter Product Name to Search!" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_recycler_view"
             android:layout_width="wrap_content"
@@ -28,7 +16,7 @@
             android:layout_margin="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_text" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

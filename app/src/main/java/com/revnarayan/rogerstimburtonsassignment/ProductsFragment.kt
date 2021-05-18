@@ -1,10 +1,7 @@
 package com.revnarayan.rogerstimburtonsassignment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -49,25 +46,20 @@ class ProductsFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity?.applicationContext)
         }
 
-
-        val listener = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) = Unit
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                myViewModel.executeSearch(s)
-            }
-        }
-        search_text.addTextChangedListener(listener)
     }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) = inflater.inflate(R.menu.menu_main, menu)
 
     private fun updateProductList() {
         productsAdapter.apply {
             productItems = productList
             notifyDataSetChanged()
         }
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) = inflater.inflate(R.menu.menu_main, menu)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
