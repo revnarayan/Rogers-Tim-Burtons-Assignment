@@ -2,4 +2,9 @@
 <resources>
     <dimen name="dp_160">160dp</dimen>
     <dimen name="dp_100">100</dimen>
+    <dimen name="dimes_100">100dp</dimen>
+    <dimen name="dimes_18">18dp</dimen>
+    <dimen name="dime_20">20dp</dimen>
+    <dimen name="dime_10">10dp</dimen>
+    <dimen name="dime_0">0dp</dimen>
 </resources>

@@ -12,6 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dime_20"
         android:orientation="vertical">
 
 
@@ -20,21 +21,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/dime_10"
             android:text="@{productItem.name}"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="10dp"
             android:text="@{productItem.costString}"
-            android:textColor="@color/dark_grey"
-            android:textSize="18sp" />
+            android:textColor="#737373"
+            android:textSize="12sp" />
 
 
     </LinearLayout>

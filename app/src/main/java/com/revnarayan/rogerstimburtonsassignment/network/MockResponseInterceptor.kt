@@ -14,9 +14,9 @@ class MockResponseInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val uri = chain.request().url().uri().toString()
         val mockProducts = arrayListOf(
-            Product(id = 1, name = "Coffee", size = "small", cost = 0.99, type = "drink"),
-            Product(id = 2, name = "Coffee", size = "medium", cost = 1.22, type = "drink"),
-            Product(id = 3, name = "Coffee", size = "large", cost = 1.54, type = "drink"),
+            Product(id = 1, name = "Coffee Sm", size = "small", cost = 0.99, type = "drink"),
+            Product(id = 2, name = "Coffee Med", size = "medium", cost = 1.22, type = "drink"),
+            Product(id = 3, name = "Coffee Lg", size = "large", cost = 1.54, type = "drink"),
             Product(
                 id = 4,
                 name = "Lemon Poppy Seed Cake",

@@ -8,11 +8,11 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/dimes_100"
+        android:layout_height="@dimen/dimes_100"
         android:layout_gravity="start"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="@dimen/dimes_18"
+        android:layout_marginTop="@dimen/dimes_100"
         android:layout_marginBottom="50dp"
         android:importantForAccessibility="no"
         android:src="@drawable/ic_baseline_circle_24"
@@ -21,11 +21,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginStart="@dimen/dimes_18"
+        android:layout_marginBottom="@dimen/dimes_18"
         android:foregroundGravity="center"
-        android:text="reva1.narayan@gmail.com"
+        android:text="@string/reva1_narayan_gmail_com"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 
 </LinearLayout>

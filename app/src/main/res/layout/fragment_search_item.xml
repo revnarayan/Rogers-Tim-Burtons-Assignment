@@ -13,7 +13,7 @@
             android:id="@+id/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/dime_10"
             android:autofillHints="Enter Product Name to Search!"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:hint="@string/search_products"
@@ -34,8 +34,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_search_recycler_view"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_margin="20dp"
+                android:layout_height="@dimen/dime_0"
+                android:layout_margin="@dimen/dime_20"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_text"/>
