@@ -29,6 +29,21 @@ android {
             enabled true
         }
     }
+    flavorDimensions "target"
+    productFlavors {
+        dev {
+            dimension "target"
+            applicationIdSuffix ".dev"
+        }
+        prod {
+            dimension "target"
+            applicationIdSuffix ".prod"
+        }
+        qa {
+            dimension "target"
+            applicationIdSuffix ".qa"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
